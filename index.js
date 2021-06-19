@@ -15,13 +15,11 @@ const PORT = process.env.PORT || 5000;
 
 
 app.post('/task1', async (req, res) => {
-    // console.log("POST Connected...");
     const { url } = req.body;
     const { first_collection } = req.query;
     const { second_collection } = req.headers;
     var latest_devices = [];
     
-    // const Devices = mongoose.Connection.collection(first_collection);
     await mongoose.connect(
         url,
         {
@@ -31,12 +29,8 @@ app.post('/task1', async (req, res) => {
             useCreateIndex: true
         }, async () => {
             try {
-                // console.log("MONGODB Connected...");
                 const collection1 = await mongoose.model('collection1', collection1_Schema, first_collection);
                 await collection1.find({}, function(err, data) { latest_devices = (data) }).sort({ 'createdAt':-1 }).limit(30);
-                
-
-                // res.send(latest_devices);
                 
                 var answer = [];
                 var collection2 = await mongoose.model('collection2', collection2_Schema, second_collection);
@@ -52,14 +46,10 @@ app.post('/task1', async (req, res) => {
                 
             }
             catch (e) {
-                // console.log(e)
                 res.send("Error In Fetching Data...")
             }
         }
     );
-        
-    // res.send(latest_devices)
-    // res.send(`${first_collection} , ${url} , ${second_collection}`);
 })
 
 
@@ -82,9 +72,7 @@ app.post('/task2', async (req, res) => {
     const addressList = req.body;
     var result = [];
     for(address of addressList){
-        // console.log(address);
         const getCoordinates = await fetchGeocode(address);
-        // console.log(getCoordinates.status);
         if(getCoordinates.status === "OK"){
             const {lat , lng} = getCoordinates.results[0].geometry.location;
             const data = {"add": address, "location": [lat , lng]}
