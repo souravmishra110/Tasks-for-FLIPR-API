@@ -1,5 +1,5 @@
 # Tasks-for-FLIPR-API
-fetchgeocode : This Function fetches the lat and for the Array of addresses.
+fetchgeocode : This Function fetches the lat and long for the Array of addresses.
 
 POST
 https://sourav-mishra-api-task.herokuapp.com/task1?first_collection=devices
@@ -14,7 +14,7 @@ first_collection = devices
 Bodyraw (json)
 JSON
 {
-  "url": "mongodb+srv://backendconcoxdeveloper:V3jUV7QXqEoAtnhy@cluster0-zhjde.mongodb.net/__CONCOX__"
+  "url": "MONGODB URL"
 }
 
 
